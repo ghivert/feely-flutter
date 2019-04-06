@@ -14,7 +14,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return Elements.scaffold(
       context: context,
-      child: Elements.FullHeight(
+      child: Container(
         decoration: BoxDecoration(color: Styles.grey),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,

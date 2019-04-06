@@ -32,13 +32,11 @@ Widget whiteBackground(Widget child) {
 Widget scaffold({ BuildContext context, Widget child }) {
   return whiteBackground(
     mediaQueries(
-      // safeArea(
-        directionality(
-          whiteBackground(
-            child,
-          ),
+      directionality(
+        whiteBackground(
+          child,
         ),
-      // ),
+      ),
     ),
   );
 }
@@ -59,28 +57,6 @@ class FullWidth extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: this.height,
-      decoration: this.decoration,
-      child: this.child,
-    );
-  }
-}
-
-class FullHeight extends StatelessWidget {
-  final child;
-  final decoration;
-  final width;
-
-  FullHeight({
-    @required this.child,
-    this.decoration,
-    this.width,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: double.infinity,
-      width: this.width,
       decoration: this.decoration,
       child: this.child,
     );
