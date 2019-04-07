@@ -46,3 +46,8 @@ Everthing is MIT licensed! Use it at your will! But think to say thanks, or let 
 # Contribution
 
 Want to contribute in any way (and, well, I don’t know what you could do, but who knows)? Feel free to submit issues or pull requests!
+
+# Credits
+
+Application design by [Ollie Baker](https://medium.com/@OllieBrkr), found on [Adam Evans Medium post](https://medium.com/inspiration-supply/messenger-chat-app-uis-a8aa76e33ba4).
+
