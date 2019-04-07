@@ -33,14 +33,14 @@ class ProfilePicture extends StatelessWidget {
   }
 }
 
-class HomeButton extends StatelessWidget {
+class NotificationButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
       height: radius,
       width: radius,
       child: Center(
-        child: Icon(CupertinoIcons.add),
+        child: Icon(Icons.notifications_none),
       ),
     );
   }
@@ -72,7 +72,7 @@ class Navbar extends StatelessWidget {
         Container(
           padding: EdgeInsets.fromLTRB(24, 0, 24, 9),
           child: child,
-        )
+        ),
       ),
     );
   }
@@ -84,7 +84,7 @@ class Navbar extends StatelessWidget {
         children: [
           ProfilePicture(),
           Title(value: CONVERSATIONS),
-          HomeButton(),
+          NotificationButton(),
         ],
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import './navbar.dart';
+import './body.dart';
 import './elements.dart' as Elements;
 import './styles.dart' as Styles;
 
@@ -21,32 +22,10 @@ class App extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Navbar(),
-            MessageList(),
+            Expanded(
+              child: Body(),
+            )
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class SearchBar extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Text('test', style: TextStyle(color: Colors.black))
-    );
-  }
-}
-
-class MessageList extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          shrinkWrap: false,
-          children: List(10).map((_) => SearchBar()).toList(),
         ),
       ),
     );
