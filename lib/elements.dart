@@ -29,7 +29,7 @@ Widget whiteBackground(Widget child) {
   );
 }
 
-Widget scaffold({ BuildContext context, Widget child }) {
+Widget scaffold({BuildContext context, Widget child}) {
   return whiteBackground(
     mediaQueries(
       directionality(

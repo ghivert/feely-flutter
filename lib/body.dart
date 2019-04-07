@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import './components/search_bar.dart';
 import './body/conversation.dart';
-import './styles.dart' as Styles;
+import './body/floating_button.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -45,26 +45,7 @@ class _BodyState extends State<Body> {
               shrinkWrap: false,
               itemBuilder: _itemBuilder,
             ),
-            SafeArea(
-              bottom: true,
-              top: false,
-              child: Container(
-                alignment: Alignment.bottomRight,
-                child: Padding(
-                  padding: EdgeInsets.only(right: Styles.bodyPadding),
-                  child: FloatingActionButton(
-                    backgroundColor: Color.fromARGB(255, 131, 128, 252),
-                    onPressed: () {
-                      debugPrint('Pushed');
-                    },
-                    child: Icon(
-                      Icons.add,
-                      size: 32,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            FloatingButton(),
           ],
         ),
       ),

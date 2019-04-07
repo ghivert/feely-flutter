@@ -12,11 +12,12 @@ class SearchBar extends StatefulWidget {
   });
 
   @override
-  _SearchBarState createState() =>
-    _SearchBarState(
+  _SearchBarState createState() {
+    return _SearchBarState(
       onSubmitted: onSubmitted,
       initValue: initValue,
     );
+  }
 }
 
 class _SearchIcon extends StatelessWidget {
@@ -47,11 +48,10 @@ class _TextInput extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _TextInputState createState() =>
-    _TextInputState(
-      placeholder: placeholder,
-      initValue: initValue,
-    );
+  _TextInputState createState() => _TextInputState(
+        placeholder: placeholder,
+        initValue: initValue,
+      );
 }
 
 class _TextInputState extends State<_TextInput> {

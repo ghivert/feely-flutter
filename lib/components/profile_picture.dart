@@ -10,7 +10,8 @@ class ProfilePicture extends StatelessWidget {
     const String url = 'https://lorempixel.com/400/400/people';
     return Container(
       child: ClipOval(
-        child: Image.network(url,
+        child: Image.network(
+          url,
           fit: BoxFit.cover,
           height: radius,
           width: radius,
