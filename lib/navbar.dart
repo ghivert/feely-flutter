@@ -20,7 +20,7 @@ const TitleStyle = TextStyle(
 class ProfilePicture extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    const url = 'https://lorempixel.com/400/400/people';
+    const String url = 'https://lorempixel.com/400/400/people';
     return Container(
       child: ClipOval(
         child: Image.network(url,
@@ -47,7 +47,7 @@ class NotificationButton extends StatelessWidget {
 }
 
 class Title extends StatelessWidget {
-  final value;
+  final String value;
 
   Title({Key key, this.value}) : super(key: key);
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import './components/search_bar.dart';
 
 class Message extends StatelessWidget {
-  final index;
+  final int index;
 
   Message({Key key, this.index}) : super(key: key);
 
@@ -34,7 +34,10 @@ class _BodyState extends State<Body> {
 
   Widget _itemBuilder(context, index) {
     return index == 0
-      ? SearchBar(onSubmitted: _searchBarSubmitted)
+      ? SearchBar(
+          onSubmitted: _searchBarSubmitted,
+          initValue: content,
+        )
       : Placeholder();
   }
 

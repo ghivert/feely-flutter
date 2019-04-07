@@ -2,14 +2,20 @@ import 'package:flutter/material.dart';
 
 class SearchBar extends StatefulWidget {
   final ValueChanged<String> onSubmitted;
+  final String initValue;
 
   SearchBar({
     Key key,
     this.onSubmitted,
+    this.initValue,
   });
 
   @override
-  _SearchBarState createState() => _SearchBarState(onSubmitted: onSubmitted);
+  _SearchBarState createState() =>
+    _SearchBarState(
+      onSubmitted: onSubmitted,
+      initValue: initValue,
+    );
 }
 
 class _SearchIcon extends StatelessWidget {
@@ -26,27 +32,48 @@ class _SearchIcon extends StatelessWidget {
 }
 
 class _TextInput extends StatefulWidget {
-  final controller;
-  final onSubmitted;
-  final placeholder;
+  final TextEditingController controller;
+  final ValueChanged<String> onSubmitted;
+  final String placeholder;
+  final String initValue;
 
   _TextInput({
     Key key,
     @required this.controller,
     this.onSubmitted,
     this.placeholder,
+    this.initValue,
   }) : super(key: key);
 
   @override
-  _TextInputState createState() => _TextInputState(placeholder: placeholder);
+  _TextInputState createState() =>
+    _TextInputState(
+      placeholder: placeholder,
+      initValue: initValue,
+    );
 }
 
 class _TextInputState extends State<_TextInput> {
+  final String initValue;
   String placeholder;
   String _placeholder;
 
-  _TextInputState({placeholder}) {
-    this.placeholder = placeholder == null ? '' : placeholder;
+  bool _isInitialized() {
+    return initValue != null && initValue != '';
+  }
+
+  String _computeFinalPlaceholder(String placeholder) {
+    final bool isNull = placeholder == null;
+    if (isNull || _isInitialized()) {
+      return '';
+    } else {
+      return placeholder;
+    }
+  }
+
+  _TextInputState({placeholder, this.initValue}) {
+    final String finalPlaceholder = _computeFinalPlaceholder(placeholder);
+    this.placeholder = finalPlaceholder;
     this._placeholder = this.placeholder;
   }
 
@@ -89,9 +116,12 @@ class _TextInputState extends State<_TextInput> {
 
 class _SearchBarState extends State<SearchBar> {
   final ValueChanged<String> onSubmitted;
-  final TextEditingController controller = TextEditingController();
+  final String initValue;
+  TextEditingController controller;
 
-  _SearchBarState({this.onSubmitted});
+  _SearchBarState({this.onSubmitted, @required this.initValue}) {
+    controller = TextEditingController(text: initValue);
+  }
 
   final BoxDecoration _searchBarStyle = BoxDecoration(
     color: Colors.white,
@@ -110,6 +140,7 @@ class _SearchBarState extends State<SearchBar> {
             _SearchIcon(),
             Expanded(
               child: _TextInput(
+                initValue: initValue,
                 controller: controller,
                 onSubmitted: onSubmitted,
                 placeholder: 'Search conversations…',

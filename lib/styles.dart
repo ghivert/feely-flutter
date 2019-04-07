@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-const grey = Color.fromRGBO(248, 249, 252, 1);
+const Color grey = Color.fromRGBO(248, 249, 252, 1);
 
-const shadow = BoxShadow(
+const BoxShadow shadow = BoxShadow(
   color: Colors.black12,
   blurRadius: 10,
   spreadRadius: 5,
