@@ -21,7 +21,10 @@ class _BodyState extends State<Body> {
   Widget _itemBuilder(context, index) {
     if (index == 0) {
       return SearchBar(
-        onSubmitted: _searchBarSubmitted,
+        onSubmitted: (value) {
+          FocusScope.of(context).requestFocus(FocusNode());
+          _searchBarSubmitted(value);
+        },
         initValue: content,
       );
     } else if (index % 2 == 0) {

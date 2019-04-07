@@ -35,8 +35,13 @@ class Title extends StatelessWidget {
   }
 }
 
-class Navbar extends StatelessWidget {
-  Widget _layout({Widget child}) {
+class _Layout extends StatelessWidget {
+  final child;
+
+  _Layout({Key key, this.child}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Elements.FullWidth(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -50,10 +55,12 @@ class Navbar extends StatelessWidget {
       ),
     );
   }
+}
 
+class Navbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return _layout(
+    return _Layout(
       child: Row(
         children: [
           ProfilePicture(radius: iconSize),
