@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../styles.dart' as Styles;
 
 class SearchBar extends StatefulWidget {
   final ValueChanged<String> onSubmitted;
@@ -26,7 +27,7 @@ class _SearchIcon extends StatelessWidget {
         Icons.search,
         color: Color.fromARGB(255, 171, 160, 246),
       ),
-      padding: EdgeInsets.only(right: 12, left: 12),
+      padding: EdgeInsets.only(right: Styles.padding, left: Styles.padding),
     );
   }
 }
@@ -90,13 +91,13 @@ class _TextInputState extends State<_TextInput> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(12),
+      padding: EdgeInsets.all(Styles.padding),
       child: Stack(
         children: [
           Text(
             _placeholder,
             style: TextStyle(
-              color: Color.fromARGB(255, 211, 211, 211)
+              color: Styles.lighterGrey,
             ),
           ),
           EditableText(
@@ -132,7 +133,7 @@ class _SearchBarState extends State<SearchBar> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(24),
+      padding: EdgeInsets.all(Styles.bodyPadding),
       child: Container(
         decoration: _searchBarStyle,
         child: Row(

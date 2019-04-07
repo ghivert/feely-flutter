@@ -1,21 +1,7 @@
 import 'package:flutter/material.dart';
 import './components/search_bar.dart';
-
-class Message extends StatelessWidget {
-  final int index;
-
-  Message({Key key, this.index}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Text(
-        'test $index',
-        style: TextStyle(color: Colors.black),
-      ),
-    );
-  }
-}
+import './body/conversation.dart';
+import './styles.dart' as Styles;
 
 class Body extends StatefulWidget {
   @override
@@ -33,21 +19,54 @@ class _BodyState extends State<Body> {
   }
 
   Widget _itemBuilder(context, index) {
-    return index == 0
-      ? SearchBar(
-          onSubmitted: _searchBarSubmitted,
-          initValue: content,
-        )
-      : Placeholder();
+    if (index == 0) {
+      return SearchBar(
+        onSubmitted: _searchBarSubmitted,
+        initValue: content,
+      );
+    } else if (index % 2 == 0) {
+      return ConversationDivider();
+    } else {
+      return Conversation();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: ListView.builder(
-        padding: EdgeInsets.zero,
-        shrinkWrap: false,
-        itemBuilder: _itemBuilder,
+      child: DefaultTextStyle(
+        style: TextStyle(
+          color: Colors.black87,
+        ),
+        child: Stack(
+          children: [
+            ListView.builder(
+              padding: EdgeInsets.zero,
+              shrinkWrap: false,
+              itemBuilder: _itemBuilder,
+            ),
+            SafeArea(
+              bottom: true,
+              top: false,
+              child: Container(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: EdgeInsets.only(right: Styles.bodyPadding),
+                  child: FloatingActionButton(
+                    backgroundColor: Color.fromARGB(255, 131, 128, 252),
+                    onPressed: () {
+                      debugPrint('Pushed');
+                    },
+                    child: Icon(
+                      Icons.add,
+                      size: 32,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
