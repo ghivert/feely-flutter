@@ -11,7 +11,9 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   String content = '';
 
-  void _searchBarSubmitted(value) {
+  bool _isPair(index) => index % 2 == 0;
+
+  void _onSubmitted(value) {
     setState(() {
       content = value;
     });
@@ -20,12 +22,10 @@ class _BodyState extends State<Body> {
   Widget _itemBuilder(context, index) {
     if (index == 0) {
       return SearchBar(
-        onSubmitted: (value) {
-          _searchBarSubmitted(value);
-        },
+        onSubmitted: _onSubmitted,
         initValue: content,
       );
-    } else if (index % 2 == 0) {
+    } else if (_isPair(index)) {
       return ConversationDivider();
     } else {
       return Conversation();
@@ -40,7 +40,7 @@ class _BodyState extends State<Body> {
           color: Colors.black87,
         ),
         child: Stack(
-          children: [
+          children: <Widget>[
             ListView.builder(
               padding: EdgeInsets.zero,
               shrinkWrap: false,

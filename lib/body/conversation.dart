@@ -80,12 +80,13 @@ class Conversation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: itemPadding,
-      child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Expanded(
-          child: ConversationPictureAndDetails(),
-        ),
-        Date(),
-      ]),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Expanded(child: ConversationPictureAndDetails()),
+          Date(),
+        ],
+      ),
     );
   }
 }

@@ -1,20 +1,6 @@
 import 'package:flutter/material.dart';
 import '../styles.dart' as Styles;
 
-class SearchBar extends StatefulWidget {
-  final ValueChanged<String> onSubmitted;
-  final String initValue;
-
-  SearchBar({
-    Key key,
-    this.onSubmitted,
-    this.initValue,
-  });
-
-  @override
-  _SearchBarState createState() => _SearchBarState();
-}
-
 class _SearchIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -43,7 +29,7 @@ class _TextInput extends StatefulWidget {
     @required this.controller,
     this.onSubmitted,
     this.placeholder,
-    this.initValue,
+    @required this.initValue,
   }) : super(key: key);
 
   @override
@@ -68,7 +54,9 @@ class _TextInputState extends State<_TextInput> {
     }
   }
 
-  _TextInputState() {
+  @override
+  void initState() {
+    super.initState();
     placeholder = _computeFinalPlaceholder();
   }
 
@@ -114,10 +102,26 @@ class _TextInputState extends State<_TextInput> {
   }
 }
 
+class SearchBar extends StatefulWidget {
+  final ValueChanged<String> onSubmitted;
+  final String initValue;
+
+  SearchBar({
+    Key key,
+    this.onSubmitted,
+    this.initValue,
+  });
+
+  @override
+  _SearchBarState createState() => _SearchBarState();
+}
+
 class _SearchBarState extends State<SearchBar> {
   TextEditingController controller;
 
-  _SearchBarState() {
+  @override
+  void initState() {
+    super.initState();
     controller = TextEditingController(text: widget.initValue);
   }
 

@@ -14,7 +14,9 @@ class NotificationButton extends StatelessWidget {
       height: iconSize,
       width: iconSize,
       child: Center(
-        child: Icon(Icons.notifications_none),
+        child: Icon(
+          Icons.notifications_none,
+        ),
       ),
     );
   }
@@ -29,14 +31,17 @@ class Title extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Center(
-        child: Text(this.value, style: Styles.Title),
+        child: Text(
+          this.value,
+          style: Styles.Title,
+        ),
       ),
     );
   }
 }
 
 class _Layout extends StatelessWidget {
-  final child;
+  final Widget child;
 
   _Layout({Key key, this.child}) : super(key: key);
 
@@ -62,7 +67,7 @@ class Navbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return _Layout(
       child: Row(
-        children: [
+        children: <Widget>[
           ProfilePicture(radius: iconSize),
           Title(value: CONVERSATIONS),
           NotificationButton(),
