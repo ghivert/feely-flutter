@@ -12,7 +12,6 @@ class _BodyState extends State<Body> {
   String content = '';
 
   void _searchBarSubmitted(value) {
-    debugPrint(value);
     setState(() {
       content = value;
     });
@@ -22,7 +21,6 @@ class _BodyState extends State<Body> {
     if (index == 0) {
       return SearchBar(
         onSubmitted: (value) {
-          FocusScope.of(context).requestFocus(FocusNode());
           _searchBarSubmitted(value);
         },
         initValue: content,

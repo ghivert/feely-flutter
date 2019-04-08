@@ -47,8 +47,8 @@ class _Layout extends StatelessWidget {
         color: Colors.white,
         boxShadow: [Styles.Shadow],
       ),
-      child: Elements.safeArea(
-        Container(
+      child: Elements.TopSafeArea(
+        child: Container(
           padding: EdgeInsets.fromLTRB(24, 0, 24, 9),
           child: child,
         ),

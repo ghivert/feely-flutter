@@ -13,14 +13,13 @@ void main() {
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Elements.scaffold(
-      context: context,
+    return Elements.Scaffold(
       child: Container(
         decoration: BoxDecoration(color: Styles.grey),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: <Widget>[
             Navbar(),
             Expanded(
               child: Body(),

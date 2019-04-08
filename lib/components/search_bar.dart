@@ -12,12 +12,7 @@ class SearchBar extends StatefulWidget {
   });
 
   @override
-  _SearchBarState createState() {
-    return _SearchBarState(
-      onSubmitted: onSubmitted,
-      initValue: initValue,
-    );
-  }
+  _SearchBarState createState() => _SearchBarState();
 }
 
 class _SearchIcon extends StatelessWidget {
@@ -28,7 +23,10 @@ class _SearchIcon extends StatelessWidget {
         Icons.search,
         color: Color.fromARGB(255, 171, 160, 246),
       ),
-      padding: EdgeInsets.only(right: Styles.padding, left: Styles.padding),
+      padding: EdgeInsets.only(
+        right: Styles.padding,
+        left: Styles.padding,
+      ),
     );
   }
 }
@@ -36,6 +34,7 @@ class _SearchIcon extends StatelessWidget {
 class _TextInput extends StatefulWidget {
   final TextEditingController controller;
   final ValueChanged<String> onSubmitted;
+  final FocusNode focusNode = FocusNode();
   final String placeholder;
   final String initValue;
 
@@ -48,44 +47,44 @@ class _TextInput extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _TextInputState createState() => _TextInputState(
-        placeholder: placeholder,
-        initValue: initValue,
-      );
+  _TextInputState createState() => _TextInputState();
 }
 
 class _TextInputState extends State<_TextInput> {
-  final String initValue;
   String placeholder;
-  String _placeholder;
 
   bool _isInitialized() {
-    return initValue != null && initValue != '';
+    final initValueNotNull = widget.initValue != null;
+    final initValueNotEmpty = widget.initValue != '';
+    return initValueNotNull && initValueNotEmpty;
   }
 
-  String _computeFinalPlaceholder(String placeholder) {
-    final bool isNull = placeholder == null;
+  String _computeFinalPlaceholder() {
+    final bool isNull = widget.placeholder == null;
     if (isNull || _isInitialized()) {
       return '';
     } else {
-      return placeholder;
+      return widget.placeholder;
     }
   }
 
-  _TextInputState({placeholder, this.initValue}) {
-    final String finalPlaceholder = _computeFinalPlaceholder(placeholder);
-    this.placeholder = finalPlaceholder;
-    this._placeholder = this.placeholder;
+  _TextInputState() {
+    placeholder = _computeFinalPlaceholder();
   }
 
   void updatePlaceholder(value) {
     setState(() {
       if (widget.controller.text == '') {
-        _placeholder = placeholder;
+        placeholder = widget.placeholder;
       } else {
-        _placeholder = '';
+        placeholder = '';
       }
     });
+  }
+
+  void onSubmitted(value) {
+    widget.focusNode.unfocus();
+    widget.onSubmitted(value);
   }
 
   @override
@@ -93,9 +92,9 @@ class _TextInputState extends State<_TextInput> {
     return Container(
       padding: EdgeInsets.all(Styles.padding),
       child: Stack(
-        children: [
+        children: <Widget>[
           Text(
-            _placeholder,
+            placeholder,
             style: TextStyle(
               color: Styles.lighterGrey,
             ),
@@ -104,9 +103,9 @@ class _TextInputState extends State<_TextInput> {
             backgroundCursorColor: Colors.black,
             style: TextStyle(color: Colors.black87),
             controller: widget.controller,
-            focusNode: FocusNode(),
+            focusNode: widget.focusNode,
             cursorColor: Colors.black38,
-            onSubmitted: widget.onSubmitted,
+            onSubmitted: onSubmitted,
             onChanged: updatePlaceholder,
           ),
         ],
@@ -116,12 +115,10 @@ class _TextInputState extends State<_TextInput> {
 }
 
 class _SearchBarState extends State<SearchBar> {
-  final ValueChanged<String> onSubmitted;
-  final String initValue;
   TextEditingController controller;
 
-  _SearchBarState({this.onSubmitted, @required this.initValue}) {
-    controller = TextEditingController(text: initValue);
+  _SearchBarState() {
+    controller = TextEditingController(text: widget.initValue);
   }
 
   final BoxDecoration _searchBarStyle = BoxDecoration(
@@ -137,13 +134,13 @@ class _SearchBarState extends State<SearchBar> {
       child: Container(
         decoration: _searchBarStyle,
         child: Row(
-          children: [
+          children: <Widget>[
             _SearchIcon(),
             Expanded(
               child: _TextInput(
-                initValue: initValue,
+                initValue: widget.initValue,
                 controller: controller,
-                onSubmitted: onSubmitted,
+                onSubmitted: widget.onSubmitted,
                 placeholder: 'Search conversations…',
               ),
             ),

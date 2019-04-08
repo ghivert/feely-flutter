@@ -11,7 +11,10 @@ class Name extends StatelessWidget {
     return Container(
       child: Text(
         faker.person.name(),
-        style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+        style: TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }
@@ -53,11 +56,14 @@ class Details extends StatelessWidget {
         left: Styles.padding,
         right: Styles.padding,
       ),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Name(),
-        Padding(padding: EdgeInsets.all(3)),
-        LastMessage(),
-      ]),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Name(),
+          Padding(padding: EdgeInsets.all(3)),
+          LastMessage(),
+        ],
+      ),
     );
   }
 }
@@ -76,13 +82,22 @@ class Conversation extends StatelessWidget {
       padding: itemPadding,
       child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Expanded(
-          child: Row(children: [
-            ProfilePicture(radius: Styles.messagesPictureRadius),
-            Expanded(child: Details()),
-          ]),
+          child: ConversationPictureAndDetails(),
         ),
         Date(),
       ]),
+    );
+  }
+}
+
+class ConversationPictureAndDetails extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        ProfilePicture(radius: Styles.messagesPictureRadius),
+        Expanded(child: Details()),
+      ],
     );
   }
 }

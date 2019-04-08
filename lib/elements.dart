@@ -1,44 +1,72 @@
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
-Widget mediaQueries(Widget child) {
-  return MediaQuery(
-    data: MediaQueryData.fromWindow(ui.window),
-    child: child,
-  );
+abstract class ChildComponent extends StatelessWidget {
+  final Widget child;
+  ChildComponent({Key key, this.child}) : super(key: key);
 }
 
-Widget safeArea(Widget child) {
-  return SafeArea(
-    bottom: false,
-    child: child,
-  );
+class MediaQueries extends ChildComponent {
+  MediaQueries({Key key, Widget child}) : super(key: key, child: child);
+
+  @override
+  Widget build(BuildContext context) {
+    return MediaQuery(
+      data: MediaQueryData.fromWindow(ui.window),
+      child: child,
+    );
+  }
 }
 
-Widget directionality(Widget child) {
-  return Directionality(
-    textDirection: TextDirection.ltr,
-    child: child,
-  );
+class TopSafeArea extends ChildComponent {
+  TopSafeArea({Key key, Widget child}) : super(key: key, child: child);
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      bottom: false,
+      child: child,
+    );
+  }
 }
 
-Widget whiteBackground(Widget child) {
-  return Container(
-    decoration: BoxDecoration(color: Colors.white),
-    child: child,
-  );
+class LeftToRight extends ChildComponent {
+  LeftToRight({Key key, Widget child}) : super(key: key, child: child);
+
+  @override
+  Widget build(BuildContext context) {
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: child,
+    );
+  }
 }
 
-Widget scaffold({BuildContext context, Widget child}) {
-  return whiteBackground(
-    mediaQueries(
-      directionality(
-        whiteBackground(
-          child,
+class WhiteBackground extends ChildComponent {
+  WhiteBackground({Key key, Widget child}) : super(key: key, child: child);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(color: Colors.white),
+      child: child,
+    );
+  }
+}
+
+class Scaffold extends ChildComponent {
+  Scaffold({Key key, Widget child}) : super(key: key, child: child);
+
+  @override
+  Widget build(BuildContext context) {
+    return WhiteBackground(
+      child: MediaQueries(
+        child: LeftToRight(
+          child: child,
         ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 class FullWidth extends StatelessWidget {
